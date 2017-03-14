@@ -25,21 +25,28 @@
 ROOT_DIR=`pwd`
 BIN_DIR=${ROOT_DIR}/bin
 CACHE_DIR=${ROOT_DIR}/cache
+MARK_STR="# added by cupkee-cli setup.sh"
 
 mkdir -p ${CACHE_DIR}
 
-# clone cupkee platform
-echo "Starting clone cupkee data, please wait ..."
-git clone  https://github.com/cupkee/cupkee.git ${CACHE_DIR}/cupkee
+# clone or update cupkee platform
+if [ ! -d ${CACHE_DIR}/cupkee ]; then
+    echo "Starting clone cupkee data, please wait ..."
+    git clone  https://github.com/cupkee/cupkee.git ${CACHE_DIR}/cupkee
+fi
 
 # setup cupkee platform
 echo "Starting setup cupkee data, please wait ..."
 cd ${CACHE_DIR}/cupkee && make setup
 
 # set user PATH
-echo "# added by cupkee-cli setup.sh" >> ~/.bash_profile
-echo "export CUPKEE_ROOT=${ROOT_DIR}" >> ~/.bash_profile
-echo "export PATH=\$PATH:${BIN_DIR}" >> ~/.bash_profile
+USR_PROFILE=~/.bash_profile
+if ! grep -Fxq "${MARK_STR}" ${USR_PROFILE}
+then
+    echo ${MARK_STR} >> ${USR_PROFILE}
+    echo "export CUPKEE_ROOT=${ROOT_DIR}" >> ${USR_PROFILE}
+    echo "export PATH=\$PATH:${BIN_DIR}"  >> ${USR_PROFILE}
+fi
 
 # setup complete
 echo "Setup OK"
