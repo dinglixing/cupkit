@@ -24,5 +24,11 @@
 
 APP_DIR=`pwd`
 
-docker run --rm -v ${APP_DIR}:/home/cupkee/app -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build \
-    make MAIN_DIR=/home/cupkee/app $@
+if [ -e $1 ];
+then
+    CMD=/home/cupkee/app/$@
+else
+    CMD=$@
+fi
+
+docker run --rm -it -v ${APP_DIR}:/home/cupkee/app -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build ${CMD}
