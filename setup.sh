@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 ROOT_DIR=`pwd`
+TEMP_DIR=${ROOT_DIR}/template
 BIN_DIR=${ROOT_DIR}/bin
 CACHE_DIR=${ROOT_DIR}/cache
 MARK_STR="# added by cupkee-cli setup.sh"
@@ -39,12 +40,15 @@ fi
 echo "Starting setup cupkee data, please wait ..."
 cd ${CACHE_DIR}/cupkee && make setup
 
+# create cupkee main client command
+sed -e "s#cupkee_install_path#${ROOT_DIR}#" ${TEMP_DIR}/cupkee.main.template 1> ${BIN_DIR}/cupkee
+chmod a+x ${BIN_DIR}/cupkee
+
 # set user PATH
 USR_PROFILE=~/.bash_profile
 if ! grep -Fxq "${MARK_STR}" ${USR_PROFILE}
 then
     echo ${MARK_STR} >> ${USR_PROFILE}
-    echo "export CUPKEE_ROOT=${ROOT_DIR}" >> ${USR_PROFILE}
     echo "export PATH=\$PATH:${BIN_DIR}"  >> ${USR_PROFILE}
 fi
 

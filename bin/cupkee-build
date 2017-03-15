@@ -23,6 +23,5 @@
 # SOFTWARE.
 
 APP_DIR=`pwd`
-APP_CFG=${APP_DIR}/cupkee.yml
 
-echo cupkee app build
+docker run --rm -v ${APP_DIR}:/home/cupkee/app -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build cupkee build $@

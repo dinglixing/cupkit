@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+CUPKEE_ROOT=cupkee_install_path
+
+if [ $# -eq 0 ];
+then
+    echo "Usage: cupkee sub_comand ..."
+    echo "  - build: build cupkee app on current directary"
+    exit 0
+fi
+
+CMD_PREFIX="cupkee-"
+CMD=$1
+
+shift
+
+case ${CMD} in
+    "build") CUPKEE_ROOT=${CUPKEE_ROOT} ${CMD_PREFIX}${CMD} $@
+esac
