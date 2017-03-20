@@ -22,8 +22,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-APP_DIR=`pwd`
-APP_CFG=${APP_DIR}/cupkee.yml
 
-docker run --rm -v ${APP_DIR}:/home/cupkee/app -v ${CUPKEE_ROOT}/env-bin:/home/cupkee/bin cupkee/env-build \
-    /home/cupkee/bin/app-init $@
+if [ ! -z $1 ];
+then
+    mkdir -p $1
+    if [ $? -ne 0 ]; 
+    then
+        echo "Can't create directionary: $1"
+        exit -1;
+    fi
+    APP_DIR=`pwd`/$1
+else
+    APP_DIR=`pwd`
+fi
+
+cp -r ${CUPKEE_ROOT}/template/app.template/* ${APP_DIR}
+

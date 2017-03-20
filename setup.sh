@@ -23,9 +23,11 @@
 # SOFTWARE.
 
 ROOT_DIR=`pwd`
+
 TEMP_DIR=${ROOT_DIR}/template
 BIN_DIR=${ROOT_DIR}/bin
 CACHE_DIR=${ROOT_DIR}/cache
+
 MARK_STR="# added by cupkee-cli setup.sh"
 
 mkdir -p ${CACHE_DIR}
@@ -45,7 +47,16 @@ sed -e "s#cupkee_install_path#${ROOT_DIR}#" ${TEMP_DIR}/cupkee.main.template 1> 
 chmod a+x ${BIN_DIR}/cupkee
 
 # set user PATH
-USR_PROFILE=~/.bash_profile
+## Todo: probe profile name base on OS
+
+if [ -e ~/.bash_profile ]; then
+    USR_PROFILE=~/.bash_profile
+elif [ -e ~/.bashrc ]; then
+    USER_PROFILE=~/.bashrc
+else
+    USER_PROFILE=~/.profile
+fi
+
 if ! grep -Fxq "${MARK_STR}" ${USR_PROFILE}
 then
     echo ${MARK_STR} >> ${USR_PROFILE}
