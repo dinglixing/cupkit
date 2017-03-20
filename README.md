@@ -32,3 +32,17 @@ $ git clone https://github.com/cupkee/cupkee-cli.git ~/.cupkee-cli
 $ cd ~/.cupkee-cli && setup.sh
 ```
 
+## 创建cupkee app项目
+
+```
+$ cd your_working_path
+$ cupkee init your_project
+```
+
+## 编译cupkee app
+
+```
+// in your project
+$ cupkee build BOARD=stm32f103 // BOARD=target
+```
+
