@@ -43,6 +43,13 @@ if [ ! -d ${CACHE_DIR}/cupkee ]; then
 fi
 
 # setup cupkee platform
+echo "Starting setup cupkee env-bin, please wait ..."
+docker run --rm -v ${CUPKEE_ROOT}/cache/env-bin:/home/cupkee/platform cupkee/env-build npm install
+if [ ! $? -eq 0 ];
+then
+    exit;
+fi
+
 echo "Starting setup cupkee data, please wait ..."
 docker run --rm -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build make setup
 if [ ! $? -eq 0 ];

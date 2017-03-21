@@ -1,4 +1,5 @@
 # ignores
 
 cache/
+node_modules/
 bin/cupkee
