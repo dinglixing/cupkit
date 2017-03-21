@@ -36,11 +36,19 @@ mkdir -p ${CACHE_DIR}
 if [ ! -d ${CACHE_DIR}/cupkee ]; then
     echo "Starting clone cupkee data, please wait ..."
     git clone  https://github.com/cupkee/cupkee.git ${CACHE_DIR}/cupkee
+    if [ ! $? -eq 0 ];
+    then
+        exit;
+    fi
 fi
 
 # setup cupkee platform
 echo "Starting setup cupkee data, please wait ..."
-cd ${CACHE_DIR}/cupkee && make setup
+docker run --rm -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build make setup
+if [ ! $? -eq 0 ];
+then
+    exit;
+fi
 
 # create cupkee main client command
 sed -e "s#cupkee_install_path#${ROOT_DIR}#" ${TEMP_DIR}/cupkee.main.template 1> ${BIN_DIR}/cupkee
