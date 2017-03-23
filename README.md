@@ -46,3 +46,9 @@ $ cupkee init your_project
 $ cupkee build BOARD=stm32f103 // BOARD=target
 ```
 
+## 其他
+
+对于中国大陆用户，从docker hub下载的速度较慢。建议配置国内的镜像服务器：
+  * ustc: https://docker.mirrors.ustc.edu.cn
+  * aliyun: https://{your_id}.mirror.aliyuncs.com  (需要向aliyun注册获取ID)
+
