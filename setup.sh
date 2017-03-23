@@ -44,14 +44,14 @@ fi
 
 # setup cupkee platform
 echo "Starting setup cupkee env-bin, please wait ..."
-docker run --rm -v ${CUPKEE_ROOT}/cache/env-bin:/home/cupkee/platform cupkee/env-build npm install
+docker run --rm -v ${ROOT_DIR}/env-bin:/home/cupkee/platform cupkee/env-build npm install
 if [ ! $? -eq 0 ];
 then
     exit;
 fi
 
 echo "Starting setup cupkee data, please wait ..."
-docker run --rm -v ${CUPKEE_ROOT}/cache/cupkee:/home/cupkee/platform cupkee/env-build make setup
+docker run --rm -v ${CACHE_DIR}/cupkee:/home/cupkee/platform cupkee/env-build make setup
 if [ ! $? -eq 0 ];
 then
     exit;
