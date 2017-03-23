@@ -42,13 +42,17 @@ $ cupkee init your_project
 ## 编译cupkee app
 
 ```
-// in your project
+// in your_project_path
 $ cupkee build BOARD=stm32f103 // BOARD=target
 ```
 
 ## 其他
 
-对于中国大陆用户，从docker hub下载的速度较慢。建议配置国内的镜像服务器：
+1. 对于中国大陆用户，从docker hub下载的速度较慢。建议配置国内的镜像服务器：
   * ustc: https://docker.mirrors.ustc.edu.cn
   * aliyun: https://{your_id}.mirror.aliyuncs.com  (需要向aliyun注册获取ID)
 
+2. 对于Ubuntu系统等linux系统，首先应将用户加入到docker组中，否则需要采用sudo执行docker命令。
+    ```
+    $ gpasswd -a ${USER} docker
+    ```
