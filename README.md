@@ -1,10 +1,11 @@
 ## Cupkee Clinet
 
-cupkee-cli 是cupkee开发环境客户端，它被设计用来帮助开发者:
+cupkit 是定制cupkee系统固件的客户端，它被设计用来帮助开发者:
 
-1. 快速建立用于嵌入式开发的交叉编译环境
+1. 创建目标板的cupkee系统定制代码
 
-2. 快速初始化，及构建应用项目
+1. 提供通用的交叉编译环境
+
 
 <!-- more -->
 
@@ -21,29 +22,28 @@ cupkee为硬件板提供了即时交互的能力，开发者可以随时对硬�
 ## 依赖
 
 * Docker: 17.03.0或更新的版本
-* Git:    2.10.1或更新的版本
 
     较老的版本未经过测试
 
 ## 安装
 
 ```
-$ git clone https://github.com/cupkee/cupkee-cli.git ~/.cupkee-cli
-$ cd ~/.cupkee-cli && setup.sh
+$ git clone https://github.com/cupkee/cupkit.git ~/.cupkit
+$ cd ~/.cupkit && setup.sh
 ```
 
-## 创建cupkee app项目
+## 为你的目标板创建cupkee操作系统
 
 ```
 $ cd your_working_path
 $ cupkee init your_project
 ```
 
-## 编译cupkee app
+## 编译cupkee操作系统
 
 ```
 // in your_project_path
-$ cupkee build BOARD=stm32f103 // BOARD=target
+$ cupkit build CPU=stm32f103 atom // BOARD=target
 ```
 
 ## 其他

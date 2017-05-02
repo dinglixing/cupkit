@@ -28,14 +28,14 @@ TEMP_DIR=${ROOT_DIR}/template
 BIN_DIR=${ROOT_DIR}/bin
 CACHE_DIR=${ROOT_DIR}/cache
 
-MARK_STR="# added by cupkee-cli setup.sh"
+MARK_STR="# added by cupkit setup.sh"
 
 mkdir -p ${CACHE_DIR}
 
 # clone or update cupkee platform
 if [ ! -d ${CACHE_DIR}/cupkee ]; then
     echo "Starting clone cupkee data, please wait ..."
-    git clone  https://github.com/cupkee/cupkee.git ${CACHE_DIR}/cupkee
+    docker run --rm -v ${CACHE_DIR}:/home/cupkee/platform cupkee/env-build git clone https://github.com/cupkee/cupkee.git
     if [ ! $? -eq 0 ];
     then
         exit;
@@ -58,8 +58,8 @@ then
 fi
 
 # create cupkee main client command
-sed -e "s#cupkee_install_path#${ROOT_DIR}#" ${TEMP_DIR}/cupkee.main.template 1> ${BIN_DIR}/cupkee
-chmod a+x ${BIN_DIR}/cupkee
+sed -e "s#cupkit_install_path#${ROOT_DIR}#" ${TEMP_DIR}/cupkit.main.template 1> ${BIN_DIR}/cupkit
+chmod a+x ${BIN_DIR}/cupkit
 
 # set user PATH
 ## Todo: probe profile name base on OS

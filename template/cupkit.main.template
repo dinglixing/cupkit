@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-CUPKEE_ROOT=cupkee_install_path
+CUPKEE_ROOT=cupkit_install_path
 
 if [ $# -eq 0 ];
 then
-    echo "Usage: cupkee sub_comand ..."
+    echo "Usage: cupkit sub_comand ..."
+    echo "  - init:  initial cupkee firmware project"
     echo "  - build: build cupkee app on current directary"
     exit 0
 fi
 
-CMD_PREFIX="cupkee-"
+CMD_PREFIX="cupkit-"
 CMD=${CMD_PREFIX}$1
 
 if [ ! -e ${CUPKEE_ROOT}/bin/${CMD} ];

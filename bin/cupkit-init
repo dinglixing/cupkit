@@ -36,5 +36,5 @@ else
     APP_DIR=`pwd`
 fi
 
-cp -r ${CUPKEE_ROOT}/template/app.template/* ${APP_DIR}
+cp -r ${CUPKEE_ROOT}/cache/cupkee/frameworks/atom/* ${APP_DIR}
 
