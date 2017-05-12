@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+CUPKEE_ROOT=/Users/dinglixing/.cupkee
+
+if [ $# -eq 0 ];
+then
+    echo "Usage: cupkit sub_comand ..."
+    echo "  - init:  initial cupkee firmware project"
+    echo "  - build: build cupkee app on current directary"
+    exit 0
+fi
+
+CMD_PREFIX="cupkit-"
+CMD=${CMD_PREFIX}$1
+
+if [ ! -e ${CUPKEE_ROOT}/bin/${CMD} ];
+then
+    echo "command '${CMD}' not exist!"
+    exit
+fi
+
+shift
+
+CUPKEE_ROOT=${CUPKEE_ROOT} ${CMD} $@
+

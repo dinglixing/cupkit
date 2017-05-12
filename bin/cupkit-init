@@ -22,6 +22,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+function show_usage()
+{
+    echo "Usage: cupkit-init [-t frameworks] [name]"
+}
+
+TGT_PRJ=atom
+TGT_CPU=stm32f103rc
+
+while getopts "t:m:" arg
+do
+    case $arg in
+        t):
+            TGT_PRJ=$OPTARG
+            shift; shift;
+            ;;
+        m):
+            TGT_CPU=$OPTARG
+            ;;
+        ?)
+            show_usage
+            ;;
+    esac
+done
+
+if [ ! -e ${CUPKEE_ROOT}/cache/cupkee/frameworks/${TGT_PRJ} ]
+then
+    echo "Unknown framework: ${TGT_PRJ}"
+    exit -1;
+fi
 
 if [ ! -z $1 ];
 then
@@ -31,10 +60,10 @@ then
         echo "Can't create directionary: $1"
         exit -1;
     fi
-    APP_DIR=`pwd`/$1
+    TGT_DIR=`pwd`/$1
 else
-    APP_DIR=`pwd`
+    TGT_DIR=`pwd`
 fi
 
-cp -r ${CUPKEE_ROOT}/cache/cupkee/frameworks/atom/* ${APP_DIR}
+cp -r ${CUPKEE_ROOT}/cache/cupkee/frameworks/${TGT_PRJ}/* ${TGT_DIR}
 
